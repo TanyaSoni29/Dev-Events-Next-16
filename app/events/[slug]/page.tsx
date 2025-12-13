@@ -1,12 +1,17 @@
-export const dynamic = "force-dynamic";
 import EventDetails from "@/components/EventDetails";
 import { Suspense } from "react";
+import { getAllEventSlugs } from "@/lib/actions/event.action";
 
 type PageProps = {
   params: {
     slug: string;
   };
 };
+
+export async function generateStaticParams() {
+  const slugs = await getAllEventSlugs();
+  return slugs.map((slug) => ({ slug }));
+}
 
 const EventDetailsPage = async ({ params }: PageProps) => {
   return (

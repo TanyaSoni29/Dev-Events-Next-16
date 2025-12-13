@@ -16,3 +16,16 @@ export const getSimilarEventsBySlug = async (slug: string) => {
     return [];
   }
 };
+
+export const getAllEventSlugs = async (): Promise<string[]> => {
+  try {
+    await connectDB();
+
+    const events = await Event.find({}, { slug: 1 }).lean();
+
+    return events.map((event) => event.slug);
+  } catch (error) {
+    console.error("getAllEventSlugs error:", error);
+    return [];
+  }
+};
