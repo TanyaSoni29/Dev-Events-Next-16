@@ -1,5 +1,5 @@
-export { default as Booking } from "./booking.modal";
-export { default as Event } from "./event.modal";
+export { default as Booking } from "./booking.model";
+export { default as Event } from "./event.model";
 
-export type { IEvent } from "./event.modal";
-export type { IBooking } from "./booking.modal";
+export type { IEvent } from "./event.model";
+export type { IBooking } from "./booking.model";

@@ -2,9 +2,17 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
-  reactCompiler:true,
+  reactCompiler: true,
   experimental: {
-    turbopackFileSystemCacheForDev: true // to compile the project faster on restart
+    turbopackFileSystemCacheForDev: true, // to compile the project faster on restart
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+      },
+    ],
   },
   async rewrites() {
     return [
