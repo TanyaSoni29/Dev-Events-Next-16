@@ -48,3 +48,13 @@ export const getEventBySlug = async (slug: string) => {
     return null;
   }
 };
+
+export const getAllEvents = async () => {
+  try {
+    await connectDB();
+    return Event.find({}).lean(); // plain JS objects
+  } catch (error) {
+    console.error("getAllEvents error:", error);
+    return [];
+  }
+};
