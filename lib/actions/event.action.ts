@@ -29,3 +29,22 @@ export const getAllEventSlugs = async (): Promise<string[]> => {
     return [];
   }
 };
+
+export const getEventBySlug = async (slug: string) => {
+  try {
+    // Connect to MongoDB
+    await connectDB();
+
+    // Find the event by slug and convert to plain object
+    const event = await Event.findOne({ slug }).lean();
+
+    if (!event) {
+      return null; // Event not found
+    }
+
+    return event;
+  } catch (error) {
+    console.error("getEventBySlug error:", error);
+    return null;
+  }
+};

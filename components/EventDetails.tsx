@@ -2,7 +2,10 @@ import BookEvent from "@/components/BookEvent";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { IEvent } from "@/database";
-import { getSimilarEventsBySlug } from "@/lib/actions/event.action";
+import {
+  getEventBySlug,
+  getSimilarEventsBySlug,
+} from "@/lib/actions/event.action";
 import EventCard from "@/components/EventCard";
 import { cacheLife } from "next/cache";
 
@@ -57,27 +60,22 @@ type Props = {
 const EventDetails = async ({ slug }: Props) => {
   "use cache";
   cacheLife("hours");
-  const response = await fetch(`/api/events/${slug}`);
-  if (!response.ok) {
-    console.error(await response.text());
-    return notFound();
-  }
+  const event = await getEventBySlug(slug);
+  if (!event) return notFound();
   const {
-    event: {
-      _id,
-      description,
-      image,
-      overview,
-      tags,
-      date,
-      time,
-      location,
-      agenda,
-      audience,
-      mode,
-      Organizer,
-    },
-  } = await response.json();
+    _id,
+    description,
+    image,
+    overview,
+    tags,
+    date,
+    time,
+    location,
+    agenda,
+    audience,
+    mode,
+    Organizer,
+  } = event;
 
   if (!description) return notFound();
 
