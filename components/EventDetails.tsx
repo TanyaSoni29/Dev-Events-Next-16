@@ -57,7 +57,11 @@ type Props = {
 const EventDetails = async ({ slug }: Props) => {
   "use cache";
   cacheLife("hours");
-  const response = await fetch(`${BASE_URL}/api/events/${slug}`);
+  const response = await fetch(`/api/events/${slug}`);
+  if (!response.ok) {
+    console.error(await response.text());
+    return notFound();
+  }
   const {
     event: {
       _id,

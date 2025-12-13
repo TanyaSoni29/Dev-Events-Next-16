@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import EventDetails from "@/components/EventDetails";
 import { Suspense } from "react";
 
