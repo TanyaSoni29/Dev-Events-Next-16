@@ -14,10 +14,11 @@ export async function generateStaticParams() {
 }
 
 const EventDetailsPage = async ({ params }: PageProps) => {
+  const { slug } = await params;
   return (
     <main>
       <Suspense fallback={<div>Loading...</div>}>
-        <EventDetails slug={params.slug} />
+        <EventDetails slug={slug} />
       </Suspense>
     </main>
   );
